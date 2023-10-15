@@ -9,17 +9,6 @@ public class HashTable<V> {
   private Pair<V>[] pairs;
   private int size;
 
-  
-  private static class Pair<V> {
-    private int key;
-    private V value;
-    
-    public Pair(int key, V value) {
-      this.key = key;
-      this.value = value;
-    }
-  }
-
   public HashTable() {
     pairs = new Pair[capacity];
     size = 0;
@@ -49,8 +38,8 @@ public class HashTable<V> {
     int slot = getHash(key);
       
     while (pairs[slot] != null) {
-      if (pairs[slot] != null && pairs[slot].key == key) {
-        return pairs[slot].value;
+      if (pairs[slot] != null && pairs[slot].getKey() == key) {
+        return pairs[slot].getValue();
       } else if (pairs[slot] == null)
         break;
       slot = getNextSlot(slot);
@@ -64,8 +53,8 @@ public class HashTable<V> {
     int slot = getHash(key);
 
     while (pairs[slot] != null) {
-      if (pairs[slot] != null && pairs[slot].key == key) {
-        V pair = pairs[slot].value;
+      if (pairs[slot] != null && pairs[slot].getKey() == key) {
+        V pair = pairs[slot].getValue();
         pairs[slot] = null;
         return pair;
       } else if (pairs[slot] == null) {

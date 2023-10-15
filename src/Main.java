@@ -6,12 +6,12 @@ public class Main {
     Aluno al = new Aluno(1, "Gabriel");
     Aluno al2 = new Aluno(2, "Julia");
     Aluno al6 = new Aluno(9, "Helena");
-    hash.add(al.id, al);
-    hash.add(al2.id, al2);
-    hash.add(al6.id, al6);
-    Aluno get = hash.get(al6.id);
-    System.out.println(get.nome);
-    Aluno remove = hash.remove(al2.id);
-    System.out.println(remove.nome);
+    hash.add(al.getId(), al);
+    hash.add(al2.getId(), al2);
+    hash.add(al6.getId(), al6);
+    Aluno get = hash.get(al6.getId());
+    System.out.println(get.getNome());
+    Aluno remove = hash.remove(al2.getId());
+    System.out.println(remove.getNome());
   } 
 }
