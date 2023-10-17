@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 @SuppressWarnings("unchecked")
 
-public class HashTable<V> {
-  private int capacity = 2;
+public class HashTableOpenAddressing<V> {
+  private int capacity = 40;
   private Pair<V>[] pairs;
   private int size;
 
-  public HashTable() {
+  public HashTableOpenAddressing() {
     pairs = new Pair[capacity];
     size = 0;
   }
@@ -23,25 +23,28 @@ public class HashTable<V> {
   }
 
   public void add(int key, V value) {
-    size++;
+    if (value == null) {
+      System.out.println("Por favor informe um valor a ser guardado");
+    } else {
+      ensureCapacity();
+      int slot = getHash(key);
 
-    ensureCapacity();
-    int slot = getHash(key);
+      while (pairs[slot] != null && pairs[slot].getValue() != null)
+        slot = getNextSlot(slot);
 
-    while (pairs[slot] != null)
-      slot = getNextSlot(slot);
-
-    pairs[slot] = new Pair<>(key, value);
+      pairs[slot] = new Pair<>(key, value);
+      size++;
+    }
   }
 
   public V get(int key) {
     int slot = getHash(key);
       
     while (pairs[slot] != null) {
-      if (pairs[slot] != null && pairs[slot].getKey() == key) {
+      if (pairs[slot].getKey() == key && pairs[slot].getValue() != null) {
         return pairs[slot].getValue();
-      } else if (pairs[slot] == null)
-        break;
+      }
+
       slot = getNextSlot(slot);
     }
     
@@ -53,25 +56,23 @@ public class HashTable<V> {
     int slot = getHash(key);
 
     while (pairs[slot] != null) {
-      if (pairs[slot] != null && pairs[slot].getKey() == key) {
+      if (pairs[slot].getKey() == key && pairs[slot].getValue() != null) {
         V pair = pairs[slot].getValue();
-        pairs[slot] = null;
+        pairs[slot] = new Pair<>(key, null);
         return pair;
-      } else if (pairs[slot] == null) {
-        System.out.println("Elemento não encontrado.");
-        break;
       }
 
       slot = getNextSlot(slot);
     }
     
+    System.out.println("Elemento não encontrado.");
     return null;
   }
 
   private void ensureCapacity() {
-    double loadFactor = (double) size / capacity;
+    double loadFactor = (double) (size + 1) / capacity;
     
-    if (loadFactor >= 0.7) {
+    if (loadFactor >= 1) {
         capacity *= 2;
         pairs = Arrays.copyOf(pairs, capacity);
     }
