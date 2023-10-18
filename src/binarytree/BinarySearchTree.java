@@ -28,7 +28,6 @@ public class BinarySearchTree<V> {
 
   private V search(Node<V> node, int key) {
     if (node == null) {
-      System.out.println("Elemento não encotrado.");
       return null;
     }
     

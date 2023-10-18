@@ -11,7 +11,6 @@ public class BinaryTree<V> extends HashTable<V> {
 
   public BinaryTree() {
     pairs = new BinarySearchTree[capacity];
-    size = 0;
   }
 
   @Override
@@ -32,18 +31,23 @@ public class BinaryTree<V> extends HashTable<V> {
       ensureCapacity();
       int slot = getHash(key);
 
+      boolean increaseSize;
+
       if (pairs[slot] == null) {
+        increaseSize = true;
         BinarySearchTree<V> bt = new BinarySearchTree<>();
         bt.add(key, value);
         pairs[slot] = bt;
       } else {
         BinarySearchTree<V> bt = pairs[slot];
+        increaseSize = bt.search(key) == null;
         bt.add(key, value);
       }
 
-      size++;
+      if (increaseSize)
+        size++;
     }
-  } 
+  }
 
   @Override
   public V get(int key) {
@@ -64,8 +68,14 @@ public class BinaryTree<V> extends HashTable<V> {
 
     if (pairs[slot] != null) {
       BinarySearchTree<V> bt = pairs[slot];
+
+      if ( bt.search(key) != null)
+        size--;
+  
       return bt.remove(key);
     }
+
+    
     
     System.out.println("Elemento não encontrado.");
     return null;

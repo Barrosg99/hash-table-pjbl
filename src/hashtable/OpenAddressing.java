@@ -20,7 +20,6 @@ public class OpenAddressing<V> extends HashTable<V> {
 
   public OpenAddressing() {
     pairs = new Pair[capacity];
-    size = 0;
   }
 
   @Override
@@ -41,11 +40,16 @@ public class OpenAddressing<V> extends HashTable<V> {
       ensureCapacity();
       int slot = getHash(key);
 
-      while (pairs[slot] != null && pairs[slot].value != null)
+      while (pairs[slot] != null && pairs[slot].value != null && pairs[slot].key != key)
         slot = getNextSlot(slot);
 
-      pairs[slot] = new Pair<>(key, value);
-      size++;
+      if (pairs[slot] != null && pairs[slot].key == key) {
+        pairs[slot] = new Pair<>(key, value);
+      } else {
+        pairs[slot] = new Pair<>(key, value);
+        size++;
+      }
+      
     }
   }  
 
@@ -73,6 +77,7 @@ public class OpenAddressing<V> extends HashTable<V> {
       if (pairs[slot].key == key && pairs[slot].value != null) {
         V pair = pairs[slot].value;
         pairs[slot] = new Pair<>(key, null);
+        size--;
         return pair;
       }
 
