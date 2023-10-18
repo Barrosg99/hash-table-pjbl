@@ -1,3 +1,5 @@
+<img src="img/hash.png" alt="logo" width="200"/>
+
 # Projeto de Hashtable com Tratamento de Colisões
 
 Este projeto demonstra a implementação de uma hashtable com tratamento de colisões usando duas abordagens diferentes: endereçamento aberto e árvore binária. O projeto também inclui uma classe de aluno mock para gerar dados de exemplo.
