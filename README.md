@@ -8,9 +8,8 @@ Este projeto Java é uma implementação de estruturas de dados fundamentais, in
 
 - Classe abstrata que serve como base para a implementação da tabela de hash.
 - Define operações básicas, como adicionar (add), buscar (get) e remover (remove) elementos.
-- Implementa tratamento de colisões por endereçamento aberto (open addressing).
 - Inclui um método abstrato `ensureCapacity` para garantir que a tabela de hash tenha capacidade suficiente para adicionar elementos.
-- Usa a capacidade padrão de 60.000 e realiza o redimensionamento quando necessário.
+- Usa a capacidade padrão de 10 e realiza o redimensionamento quando necessário.
 
 ### `OpenAddressing<V>`
 
@@ -26,7 +25,6 @@ Este projeto Java é uma implementação de estruturas de dados fundamentais, in
 - Usa uma árvore de busca binária para armazenar elementos.
 - Implementa o método `ensureCapacity` para redimensionar a árvore quando necessário.
 - Inclui operações para adicionar, buscar e remover elementos.
-- Usa uma classe interna `Node` para representar os nós da árvore.
 - Permite armazenar dados genéricos associados a chaves inteiras.
 
 ### `BinarySearchTree<V>`
@@ -37,7 +35,7 @@ Este projeto Java é uma implementação de estruturas de dados fundamentais, in
 
 ### `Node<V>`
 
-- Classe que representa um nó em uma árvore de busca binária ou em outra estrutura de dados.
+- Classe que representa um nó em uma árvore de busca binária.
 - Armazena uma chave inteira e um valor genérico.
 - Contém referências para os nós filhos esquerdo e direito.
 

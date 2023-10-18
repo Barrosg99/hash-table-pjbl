@@ -17,7 +17,7 @@ public class BinaryTree<V> extends HashTable<V> {
   public void ensureCapacity() {
     double loadFactor = (double) (size + 1) / capacity;
     
-    if (loadFactor >= 1) {
+    if (loadFactor >= 0.7) {
         capacity *= 2;
         pairs = Arrays.copyOf(pairs, capacity);
     }

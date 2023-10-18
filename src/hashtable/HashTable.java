@@ -1,7 +1,7 @@
 package hashtable;
 
 public abstract class HashTable<V> {
-  int capacity = 60000;
+  int capacity = 10;
   int size = 0;
    
   int getHash(int key) {
