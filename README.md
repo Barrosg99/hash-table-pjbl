@@ -1,55 +1,51 @@
-# Estrutura de Dados - Implementação de Tabela de Hash e Árvore Binária em Java
+# Projeto de Hashtable com Tratamento de Colisões
 
-Este projeto Java é uma implementação de estruturas de dados fundamentais, incluindo uma tabela de hash (hash table) com tratamento de colisões por endereçamento aberto (open addressing) e uma árvore binária de busca (binary search tree).
+Este projeto demonstra a implementação de uma hashtable com tratamento de colisões usando duas abordagens diferentes: endereçamento aberto e árvore binária. O projeto também inclui uma classe de aluno mock para gerar dados de exemplo.
 
-## Classes Implementadas
+## Estrutura do Projeto
 
-### `HashTable<V>`
+O projeto está organizado em pacotes, cada um contendo classes relacionadas:
 
-- Classe abstrata que serve como base para a implementação da tabela de hash.
-- Define operações básicas, como adicionar (add), buscar (get) e remover (remove) elementos.
-- Inclui um método abstrato `ensureCapacity` para garantir que a tabela de hash tenha capacidade suficiente para adicionar elementos.
-- Usa a capacidade padrão de 10 e realiza o redimensionamento quando necessário.
+- `binarytree`: Contém a implementação da árvore binária usada para a abordagem de tratamento de colisões na hashtable.
+- `hashtable`: Contém as classes `OpenAddressing` e `BinaryTree`, que implementam as duas abordagens de tratamento de colisões.
+- `mockaluno`: Contém a classe `Aluno` e `Mock` para criar dados de exemplo de alunos.
+- `Main.java`: A classe principal que demonstra o uso das duas implementações de hashtable e realiza algumas operações de benchmarking de eficiência.
 
-### `OpenAddressing<V>`
+## Funcionalidades
 
-- Implementação concreta da tabela de hash com tratamento de colisões por endereçamento aberto.
-- Usa um array de pares chave-valor para armazenar os elementos.
-- Implementa o método `ensureCapacity` para redimensionar a tabela quando necessário.
-- Inclui operações para adicionar, buscar e remover elementos.
-- Utiliza uma classe interna `Pair` para representar pares chave-valor.
+O projeto inclui as seguintes funcionalidades:
 
-### `BinaryTree<V>`
+- Inicialização de uma hashtable com tratamento de colisões usando endereçamento aberto ou árvore binária.
+- Adição de elementos à hashtable com base em um valor de chave único.
+- Remoção de elementos com base na chave.
+- Recuperação de elementos com base na chave.
+- Benchmarking de eficiência para comparar a eficiência de busca nas duas implementações de tratamento de colisões.
 
-- Implementação de uma árvore binária de busca (binary search tree).
-- Usa uma árvore de busca binária para armazenar elementos.
-- Implementa o método `ensureCapacity` para redimensionar a árvore quando necessário.
-- Inclui operações para adicionar, buscar e remover elementos.
-- Permite armazenar dados genéricos associados a chaves inteiras.
+## Como Executar o Projeto
 
-### `BinarySearchTree<V>`
+1. Clone o repositório para sua máquina local:
 
-- Implementação da árvore de busca binária.
-- Inclui operações de adicionar, buscar e remover elementos na árvore.
-- Usa uma classe interna `Node` para representar os nós da árvore.
+```bash
+git clone https://seurepositorio.com/projeto-hashtable.git
+```
 
-### `Node<V>`
+2. Compile o código:
 
-- Classe que representa um nó em uma árvore de busca binária.
-- Armazena uma chave inteira e um valor genérico.
-- Contém referências para os nós filhos esquerdo e direito.
+```bash
+cd projeto-hashtable
+javac Main.java
+```
 
-### `Aluno`
+3. Execute o código:
 
-- Classe de exemplo que representa um aluno com um ID e um nome.
+```bash
+java Main
+```
 
-## Uso do Programa de Linha de Comando
+Isso executará a classe principal e demonstrará as funcionalidades do projeto.
 
-Para utilizar este programa, você pode seguir estas etapas:
+## Conclusão
 
-1. Compile os arquivos-fonte Java.
-2. Execute a classe `Main` para interagir com a tabela de hash e a árvore binária.
+Este projeto mostra como implementar uma hashtable com tratamento de colisões usando duas abordagens diferentes e compara a eficiência de busca entre elas. Você pode usar este projeto como referência para entender como implementar estruturas de dados de hashtable com tratamento de colisões em suas próprias aplicações.
 
-## Contribuição
-
-Você é bem-vindo(a) a contribuir com melhorias ou correções neste projeto. Sinta-se à vontade para abrir uma pull request e teremos o prazer de revisar suas contribuições.
+Sinta-se à vontade para expandir este projeto e adicionar mais funcionalidades, como redimensionamento automático da hashtable ou outras técnicas de tratamento de colisões, conforme necessário.
