@@ -4,24 +4,36 @@ import java.util.Arrays;
 
 @SuppressWarnings("unchecked")
 
-public class HashTableOpenAddressing<V> {
-  private int capacity = 40;
-  private Pair<V>[] pairs;
-  private int size;
+public class OpenAddressing<V> extends HashTable<V> {
 
-  public HashTableOpenAddressing() {
+  private class Pair<S> {
+    public int key;
+    public S value;
+
+    public Pair(int key, S value) {
+      this.key = key;
+      this.value = value;
+    }
+  }
+
+  private Pair<V>[] pairs;
+
+  public OpenAddressing() {
     pairs = new Pair[capacity];
     size = 0;
   }
 
-  private int getHash(int key) {
-    return key % capacity;
+  @Override
+  public void ensureCapacity() {
+    double loadFactor = (double) (size + 1) / capacity;
+    
+    if (loadFactor >= 1) {
+        capacity *= 2;
+        pairs = Arrays.copyOf(pairs, capacity);
+    }
   }
 
-  private int getNextSlot(int slot) {
-    return (slot + 1) % capacity;
-  }
-
+  @Override
   public void add(int key, V value) {
     if (value == null) {
       System.out.println("Por favor informe um valor a ser guardado");
@@ -29,20 +41,21 @@ public class HashTableOpenAddressing<V> {
       ensureCapacity();
       int slot = getHash(key);
 
-      while (pairs[slot] != null && pairs[slot].getValue() != null)
+      while (pairs[slot] != null && pairs[slot].value != null)
         slot = getNextSlot(slot);
 
       pairs[slot] = new Pair<>(key, value);
       size++;
     }
-  }
+  }  
 
+  @Override
   public V get(int key) {
     int slot = getHash(key);
       
     while (pairs[slot] != null) {
-      if (pairs[slot].getKey() == key && pairs[slot].getValue() != null) {
-        return pairs[slot].getValue();
+      if (pairs[slot].key == key && pairs[slot].value != null) {
+        return pairs[slot].value;
       }
 
       slot = getNextSlot(slot);
@@ -52,12 +65,13 @@ public class HashTableOpenAddressing<V> {
     return null;
   }
 
+  @Override
   public V remove(int key) {
     int slot = getHash(key);
 
     while (pairs[slot] != null) {
-      if (pairs[slot].getKey() == key && pairs[slot].getValue() != null) {
-        V pair = pairs[slot].getValue();
+      if (pairs[slot].key == key && pairs[slot].value != null) {
+        V pair = pairs[slot].value;
         pairs[slot] = new Pair<>(key, null);
         return pair;
       }
@@ -69,14 +83,5 @@ public class HashTableOpenAddressing<V> {
     return null;
   }
 
-  private void ensureCapacity() {
-    double loadFactor = (double) (size + 1) / capacity;
-    
-    if (loadFactor >= 1) {
-        capacity *= 2;
-        pairs = Arrays.copyOf(pairs, capacity);
-    }
-  }
+  
 }
-
-
